@@ -29,18 +29,18 @@ public class ConsumerThread implements Runnable {
         int count = 0;
         while (!flag) {
             try {
-                //消息出队
+                //消息出队,如果messages为null,则说明当前队列中无消息,
                 Object messages = queue.poll();
                 if (messages != null) {
                     count = 0;
                     System.out.println(DateUtil.getNow() + Thread.currentThread().getName() + "----->消费消息内容：" + messages);
-                    Thread.sleep(2000);
                 } else {
+                    //若无消息,则等待2s再进行执行
+                    System.out.println(DateUtil.getNow() + Thread.currentThread().getName() + "----->队列暂无消息,消费者等待...");
                     count++;
                     Thread.sleep(2000);
-                    System.out.println(DateUtil.getNow() + Thread.currentThread().getName() + "----->队列暂无消息,消费者等待...");
                 }
-                //队列中如果10s没有消息,此时消费者线程
+                //队列中如果10s没有消息,此时消费者线程不再消费
                 if (count >= 5) {
                     System.out.println(DateUtil.getNow() + Thread.currentThread().getName() + "超过10s无消息，消费者不再消费");
                     stop();

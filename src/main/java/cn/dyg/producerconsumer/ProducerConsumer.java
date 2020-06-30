@@ -29,23 +29,19 @@ public class ProducerConsumer {
         LinkedBlockingQueue<String> queue = new LinkedBlockingQueue<>(3);
         //新建线程
         ProducerThread producerThread1 = new ProducerThread(queue);
-//        ProducerThread producerThread2 = new ProducerThread(queue);
-//        ProducerThread producerThread3 = new ProducerThread(queue);
-//        ProducerThread producerThread4 = new ProducerThread(queue);
+        ProducerThread producerThread2 = new ProducerThread(queue);
+        ProducerThread producerThread3 = new ProducerThread(queue);
+        ProducerThread producerThread4 = new ProducerThread(queue);
         //线程池加载线程
         producerExecutor.execute(producerThread1);
-//        producerExecutor.execute(producerThread2);
-//        producerExecutor.execute(producerThread3);
-//        producerExecutor.execute(producerThread4);
-
-        Thread.sleep(10000);
+        producerExecutor.execute(producerThread2);
+        producerExecutor.execute(producerThread3);
+        producerExecutor.execute(producerThread4);
 
         ConsumerThread consumerThread1 = new ConsumerThread(queue);
         ConsumerThread consumerThread2 = new ConsumerThread(queue);
         consumerExecutor.execute(consumerThread1);
         consumerExecutor.execute(consumerThread2);
-        //主线程休眠10s
-        Thread.sleep(10000);
 
         while (true) {
             //每5s检测一次是否还有线程存活

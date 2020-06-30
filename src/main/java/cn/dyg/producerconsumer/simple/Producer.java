@@ -20,25 +20,24 @@ public class Producer implements Runnable {
 
     @Override
     public synchronized void run() {
-        for (int i = 0; i < 100; i++) {
-
+        for (int i = 1; i <= 1000; i++) {
             //如果队列满了
             if (queue.remainingCapacity() == 0) {
                 System.out.println("队列已满,不再生产产品,通知消费者进行消费");
-                this.notifyAll();
                 try {
-                    this.wait();
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+
             try {
                 queue.put(new Product(i));
-                System.out.println("生产第" + i + "个产品");
-                this.notifyAll();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            System.out.println("生产第" + i + "个产品");
+
         }
     }
 }

@@ -17,10 +17,27 @@ public class TestSimple {
         Producer producer = new Producer(queue);
         Consumer consumer = new Consumer(queue);
 
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(2,5,2, TimeUnit.SECONDS,new LinkedBlockingQueue<>(3));
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(2,5,20, TimeUnit.SECONDS,new LinkedBlockingQueue<>(3));
 
         executor.execute(producer);
         executor.execute(consumer);
+
+
+        while(true){
+            int executorActiveCount = executor.getActiveCount();
+            if (0 == executorActiveCount) {
+                System.out.println("线程池关闭");
+                executor.shutdown();
+                break;
+            }
+            System.out.println("存活线程数:"+executorActiveCount);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
 
 
     }
