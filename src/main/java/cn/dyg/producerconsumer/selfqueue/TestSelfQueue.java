@@ -25,8 +25,7 @@ class Producer implements Runnable {
 
     @Override
     public void run() {
-        for (int i = 0; i < 100; i++) {
-            System.out.println("生产第" + i + "个产品");
+        for (int i = 1; i <= 100; i++) {
             container.push(new Product(i));
         }
     }
@@ -46,7 +45,8 @@ class Consumer implements Runnable {
     @Override
     public void run() {
         for (int i = 0; i < 100; i++) {
-            System.out.println("-----消费第" + container.pop().id + "个产品");
+            int id = container.pop().id;
+            System.out.println("-----消费第" + id + "个产品");
         }
     }
 }
@@ -79,7 +79,7 @@ class SynContainer {
     /**
      * 容器计数器
      */
-    int count = 0;
+    volatile int count = 0;
 
     /**
      * 生产者放入产品
@@ -99,6 +99,7 @@ class SynContainer {
         products[count] = product;
         count++;
 
+        System.out.println("生产第" + product.id + "个产品");
         //可以通知消费者消费
         this.notifyAll();
     }
