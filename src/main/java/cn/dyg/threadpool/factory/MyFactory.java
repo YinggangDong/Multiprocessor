@@ -1,4 +1,4 @@
-package cn.dyg.producerconsumer.factory;
+package cn.dyg.threadpool.factory;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;

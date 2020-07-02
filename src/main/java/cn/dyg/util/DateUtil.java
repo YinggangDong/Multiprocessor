@@ -1,4 +1,4 @@
-package cn.dyg.producerconsumer;
+package cn.dyg.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

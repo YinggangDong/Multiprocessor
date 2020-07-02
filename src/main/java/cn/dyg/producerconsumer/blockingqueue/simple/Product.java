@@ -1,4 +1,4 @@
-package cn.dyg.producerconsumer.simple;
+package cn.dyg.producerconsumer.blockingqueue.simple;
 
 /**
  * Product 类是 产品类

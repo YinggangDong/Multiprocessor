@@ -1,6 +1,6 @@
-package cn.dyg.producerconsumer;
+package cn.dyg.producerconsumer.blockingqueue.complex;
 
-import cn.dyg.producerconsumer.factory.MyFactory;
+import cn.dyg.threadpool.factory.MyFactory;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;

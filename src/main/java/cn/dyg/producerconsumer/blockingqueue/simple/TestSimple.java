@@ -1,4 +1,4 @@
-package cn.dyg.producerconsumer.simple;
+package cn.dyg.producerconsumer.blockingqueue.simple;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
