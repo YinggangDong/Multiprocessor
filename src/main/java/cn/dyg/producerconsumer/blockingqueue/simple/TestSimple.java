@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * TestSimple 类是
+ * TestSimple 类是 普通生产者消费者模式测试
  *
  * @author dongyinggang
  * @date 2020-06-29 21:34

@@ -3,7 +3,7 @@ package cn.dyg.producerconsumer.blockingqueue.simple;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * Consumer 类是
+ * Consumer 类是 消费者线程类
  *
  * @author dongyinggang
  * @date 2020-06-29 21:26
