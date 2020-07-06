@@ -1,5 +1,7 @@
 package cn.dyg.producerconsumer.selfqueue;
 
+import cn.dyg.producerconsumer.Product;
+
 /**
  * Container 类（或接口）是 自定义缓冲区
  *
@@ -42,7 +44,7 @@ public class SynContainer {
         products[count] = product;
         count++;
 
-        System.out.println("生产第" + product.id + "个产品");
+        System.out.println("生产第" + product.getId() + "个产品");
         //可以通知消费者消费
         this.notifyAll();
     }
@@ -73,7 +75,7 @@ public class SynContainer {
         //存在则可以进行消费.count-1 即为被消费的产品的下标
         count--;
         Product product = products[count];
-        System.out.println("-----消费第" + product.id + "个产品");
+        System.out.println("-----消费第" + product.getId() + "个产品");
         //消费完成,通知生产者生产
         this.notifyAll();
     }

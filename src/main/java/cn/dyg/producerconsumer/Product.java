@@ -1,17 +1,13 @@
-package cn.dyg.producerconsumer.blockingqueue.simple;
+package cn.dyg.producerconsumer;
 
 /**
- * Product 类是 产品类
+ * Product 类是 产品
  *
  * @author dongyinggang
- * @date 2020-06-29 21:12
+ * @date 2020-07-05 16:20
  **/
 public class Product {
 
-
-    /**
-     * 产品编号
-     */
     private int id;
 
     public Product(int id) {
@@ -20,5 +16,9 @@ public class Product {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

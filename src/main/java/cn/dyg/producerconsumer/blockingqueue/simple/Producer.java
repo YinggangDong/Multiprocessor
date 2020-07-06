@@ -1,5 +1,7 @@
 package cn.dyg.producerconsumer.blockingqueue.simple;
 
+import cn.dyg.producerconsumer.Product;
+
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**

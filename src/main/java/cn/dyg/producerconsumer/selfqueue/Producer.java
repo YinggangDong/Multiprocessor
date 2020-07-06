@@ -1,5 +1,7 @@
 package cn.dyg.producerconsumer.selfqueue;
 
+import cn.dyg.producerconsumer.Product;
+
 /**
  * Producer 类是 生产者线程
  *
