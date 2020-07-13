@@ -9,13 +9,15 @@ package cn.dyg.threadbasic.create;
 public class ImplRunnable implements Runnable{
 
     private String name;
+
+    private boolean flag = true;
+
     public ImplRunnable(String name){
         this.name = name;
     }
 
     @Override
     public void run() {
-        boolean flag = true;
         while(flag){
             System.out.println(name + "is running");
             try {
@@ -24,5 +26,9 @@ public class ImplRunnable implements Runnable{
                 e.printStackTrace();
             }
         }
+    }
+
+    public void exit(){
+        this.flag = false;
     }
 }

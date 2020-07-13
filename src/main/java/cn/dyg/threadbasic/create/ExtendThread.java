@@ -9,6 +9,7 @@ package cn.dyg.threadbasic.create;
 public class ExtendThread extends  Thread{
 
     private String name;
+    private boolean flag = true;
 
     public ExtendThread(String name){
         this.name = name;
@@ -16,7 +17,6 @@ public class ExtendThread extends  Thread{
 
     @Override
     public void run(){
-        boolean flag = true;
         while(flag){
             System.out.println(name + "is running");
             try {
@@ -25,5 +25,9 @@ public class ExtendThread extends  Thread{
                 e.printStackTrace();
             }
         }
+    }
+
+    public void exit(){
+        this.flag = false;
     }
 }
