@@ -21,7 +21,13 @@ public class ThreadCreateTest {
         //声明为守护线程并启动
         thread.setDaemon(true);
         thread.start();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+        thread.setName("守护线程改名了---->");
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
