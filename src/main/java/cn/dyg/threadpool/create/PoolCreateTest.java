@@ -17,7 +17,7 @@ public class PoolCreateTest {
         for (int i = 0; i < 10; i++) {
             Thread.sleep(1000);
             cachedThreadPool.execute(() ->
-                    System.out.println(Thread.currentThread().getName()+"is running"));
+                    System.out.println(Thread.currentThread().getName() + " is running"));
         }
     }
 }
