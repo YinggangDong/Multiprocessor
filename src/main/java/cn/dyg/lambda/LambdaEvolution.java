@@ -71,6 +71,12 @@ public class LambdaEvolution {
  * 任何接口，如果只包含唯一一个抽象方法，就是一个函数式接口，例： Runnable（）
  */
 interface FunctionalInterface {
+    /**
+     * lambda 方法是 唯一接口
+     *
+     * @author dongyinggang
+     * @date 2020/9/4 18:00
+     */
     void lambda();
 }
 
