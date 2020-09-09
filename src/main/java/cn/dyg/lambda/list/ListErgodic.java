@@ -32,7 +32,7 @@ public class ListErgodic {
     /**
      * foreach 方法是 原始foreach循环
      *
-     * @param list 数组
+     * @param list 待遍历的对象
      * @author dongyinggang
      * @date 2020/9/8 11:07
      */
