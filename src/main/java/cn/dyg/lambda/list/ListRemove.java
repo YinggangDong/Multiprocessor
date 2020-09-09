@@ -1,6 +1,5 @@
 package cn.dyg.lambda.list;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,14 +23,12 @@ public class ListRemove {
             list.add(i + "");
         }
 
-
         //1. list.foreach() 中 调用ArrayList的Remove方法
         List<String> list1 = new ArrayList<>(list.size());
         //深拷贝
         list1.addAll(Arrays.asList(new String[list.size()]));
         Collections.copy(list1,list);
         listForeach(list1);
-
 
         //2. 增强for循环 中 调用ArrayList的Remove方法
         List<String> list2 = new ArrayList<>(list.size());
@@ -51,13 +48,12 @@ public class ListRemove {
         Collections.copy(list4,list);
         forEachRemainingRemove(list4);
 
-
     }
 
     /**
      * listForeach 方法是 1. list.foreach() 中 调用ArrayList的Remove方法
      *
-     * @param list 集合
+     * @param list 待移除元素的list
      * @author dongyinggang
      * @date 2020/9/8 11:28
      */
@@ -118,8 +114,7 @@ public class ListRemove {
     /**
      * iteratorRemove 方法是 3.迭代器遍历 中 调用Iterator的remove方法
      *
-     * @param list
-     * @return
+     * @param list 待移除元素的list
      * @author dongyinggang
      * @date 2020/9/9 11:27
      */
