@@ -19,16 +19,17 @@ public class LambdaDemo {
 
         //带大括号和return的lambda表达式
         MathOperation mul = (a, b) -> {
-            return a * b * c;
+            int d = a * b;
+            return d * c;
         };
 
         //没有大括号及返回语句
         MathOperation div = (a, b) -> a / b;
 
-        System.out.println(add.operation(1,2));
-        System.out.println(sub.operation(2,1));
-        System.out.println(mul.operation(3,2));
-        System.out.println(div.operation(4,2));
+        System.out.println(add.operation(1, 2));
+        System.out.println(sub.operation(2, 1));
+        System.out.println(mul.operation(3, 2));
+        System.out.println(div.operation(4, 2));
     }
 }
 
