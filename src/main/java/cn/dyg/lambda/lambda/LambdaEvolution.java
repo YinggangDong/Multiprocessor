@@ -1,4 +1,4 @@
-package cn.dyg.lambda;
+package cn.dyg.lambda.lambda;
 
 /**
  * 1.普通类，最原始的类表现

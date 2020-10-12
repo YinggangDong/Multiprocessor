@@ -1,4 +1,4 @@
-package cn.dyg.lambda;
+package cn.dyg.lambda.lambda;
 
 /**
  * LambdaRunnable 类是 lambda实现Runnable接口
