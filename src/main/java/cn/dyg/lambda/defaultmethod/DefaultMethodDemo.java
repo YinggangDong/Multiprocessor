@@ -28,6 +28,9 @@ public class DefaultMethodDemo implements MyInterface {
         //4.实现类中有和接口静态方法重名的方法
         //  如果实例声明时使用了MyInterface就会报错,因为找不到唯一的方法,
         //  使用DefaultMethodDemo声明调用的实际是实现类自己的静态方法
+        //  如果没有在当前实现类中定义staticMethod,就会提示
+        //  "static method may be invoked on containing interface class only."
+        //  因为实现类并不能够继承接口的静态方法
         defaultMethodDemo.staticMethod();
         //5.实现类重写的普通方法
         defaultMethodDemo.ordinaryMethod();
@@ -48,7 +51,7 @@ public class DefaultMethodDemo implements MyInterface {
      */
     @Override
     public void ordinaryMethod() {
-        System.out.println(this.getClass().getSimpleName() + "实现的ordinaryMethod");
+        System.out.println("DefaultMethodDemo类实现的ordinaryMethod");
     }
 
     /**
@@ -62,11 +65,11 @@ public class DefaultMethodDemo implements MyInterface {
      */
 //    @Override
     public void staticMethod() {
-        System.out.println(this.getClass().getSimpleName() + "尝试重写静态方法");
+        System.out.println("DefaultMethodDemo类尝试重写静态方法");
     }
 
     @Override
     public void defaultMethodWaitOverride() {
-        System.out.println(this.getClass().getSimpleName() + "重写了默认方法");
+        System.out.println("DefaultMethodDemo类重写了默认方法");
     }
 }

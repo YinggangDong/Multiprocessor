@@ -31,7 +31,7 @@ public interface MyInterface {
      * @date 2020/10/10 16:53
      */
     default void defaultMethod(){
-        System.out.println("这是接口的默认方法");
+        System.out.println("这是接口MyInterface的默认方法");
     }
 
     /**
@@ -52,8 +52,15 @@ public interface MyInterface {
      * 它们都将被继承，编译器就不知道要调用哪个接口。
      *
      * 参考：
-     * 关于在java 8中，为什么不能调用当前类正在实现的接口的静态方法的解释
+     *  关于在java 8中，为什么不能调用当前类正在实现的接口的静态方法的解释
      *      https://blog.csdn.net/u012580143/article/details/81217732
+     *
+     * 疑问：
+     *   引入的原因是什么？有什么源码级应用么？暂时个人理解是有部分方法实现可以通过static方法写在接口中，
+     *   不需要必须写一个实现类来实现对应方法。提高代码的内聚性。
+     *
+     * 代码进化史：Java8接口静态方法应用
+     *   https://my.oschina.net/geektao/blog/3156306
      *
      * @author dongyinggang
      * @date 2020/10/10 16:53
