@@ -10,10 +10,10 @@ import java.util.function.Supplier;
 
 /**
  * DoubleColonDemo 类是 双冒号应用demo
- * <p>
+ *
  * ::关键字提供了四种语法，可以直接引用已有Java类或对象（实例）的方法或构造器。
  * 与lambda联合使用，::关键字可以使语言更简洁，减少冗余代码。
- * <p>
+ *
  * 参考内容：
  * 1.JAVA 8 '::' 关键字，带你深入了解它！
  * https://blog.csdn.net/weixin_42740530/article/details/104655470
@@ -236,18 +236,19 @@ public class DoubleColonDemo {
     private static void constructor(){
         System.out.println("4.调用构造函数：");
         List<Person> roster = Person.createRoster();
-        roster.addAll(roster);
         for (Person p : roster) {
             p.printPerson();
         }
-
+        //1.通过匿名内部类实现get()方法,调用构造函数
         Set<Person> rosterSet = transferElements(roster, new Supplier<Set>(){
             @Override
             public Set get() {
                 return new HashSet<>();
             }
         });
+        //2.通过lambda表达式实现get()方法,调用构造函数
         Set<Person> rosterSetLambda = transferElements(roster,()->new HashSet<>());
+        //3.简化lambda表达式实现get()方法,调用构造函数
         Set<Person> rosterSimple = transferElements(roster,HashSet::new);
         System.out.println("赋值完成：");
         for (Person person : rosterSimple) {
@@ -266,8 +267,9 @@ public class DoubleColonDemo {
 
 }
 
-
-
+/**
+ * Comparator的实现类
+ */
 class ComparatorImpl implements Comparator<Person> {
 
     @Override
