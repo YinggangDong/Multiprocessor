@@ -32,4 +32,3 @@ public class LambdaDemo {
         System.out.println(div.operation(4, 2));
     }
 }
-
