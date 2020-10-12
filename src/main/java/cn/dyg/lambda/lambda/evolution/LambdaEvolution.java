@@ -1,15 +1,4 @@
-package cn.dyg.lambda.lambda;
-
-/**
- * 1.普通类，最原始的类表现
- */
-class OrdinaryClass implements FunctionalInterface {
-
-    @Override
-    public void lambda() {
-        System.out.println("这是一个普通类");
-    }
-}
+package cn.dyg.lambda.lambda.evolution;
 
 /**
  * LambdaEvolution 类是 lambda表达式演进过程类
@@ -23,7 +12,7 @@ public class LambdaEvolution {
      * 2.静态内部类
      * 在主类内部定义的静态类
      */
-    static class StaticInnerClass implements FunctionalInterface {
+    static class StaticInnerClass implements MyFunctionalInterface {
 
         @Override
         public void lambda() {
@@ -34,18 +23,18 @@ public class LambdaEvolution {
     public static void main(String[] args) {
 
         //1.普通类
-        FunctionalInterface ordinaryClass = new OrdinaryClass();
+        MyFunctionalInterface ordinaryClass = new OrdinaryClass();
         ordinaryClass.lambda();
 
         //2.静态内部类
-        FunctionalInterface staticInnerClass = new StaticInnerClass();
+        MyFunctionalInterface staticInnerClass = new StaticInnerClass();
         staticInnerClass.lambda();
 
         /**
          * 3.局部内部类
          * 在类的方法中定义的内部类，是没有static修饰的非静态类
          */
-        class LocalInnerClass implements FunctionalInterface {
+        class LocalInnerClass implements MyFunctionalInterface {
 
             @Override
             public void lambda() {
@@ -53,7 +42,7 @@ public class LambdaEvolution {
             }
         }
 
-        FunctionalInterface localInnerClass = new LocalInnerClass();
+        MyFunctionalInterface localInnerClass = new LocalInnerClass();
         localInnerClass.lambda();
 
         /**
@@ -61,7 +50,7 @@ public class LambdaEvolution {
          * 没有通过class关键字进行类的声明，直接通过重写FunctionalInterface接口的
          * lambda方法的方式创建了一个实现该接口的匿名类
          */
-        FunctionalInterface anonymousInnerClass = new FunctionalInterface() {
+        MyFunctionalInterface anonymousInnerClass = new MyFunctionalInterface() {
 
             @Override
             public void lambda() {
@@ -74,26 +63,14 @@ public class LambdaEvolution {
          * 5.lambda简化的匿名内部类
          * 通过lambda表达式简化了匿名内部类的创建方式
          */
-        FunctionalInterface lambdaClass =
+        MyFunctionalInterface lambdaClass =
                 () -> System.out.println("这是一个lambda简化的匿名内部类");
         lambdaClass.lambda();
 
     }
 }
 
-/**
- * 函数式接口
- * 任何接口，如果只包含唯一一个抽象方法，就是一个函数式接口，例： Runnable（）
- */
-interface FunctionalInterface {
-    /**
-     * lambda 方法是 唯一接口
-     *
-     * @author dongyinggang
-     * @date 2020/9/4 18:00
-     */
-    void lambda();
-}
+
 
 
 
