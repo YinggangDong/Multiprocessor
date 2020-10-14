@@ -24,15 +24,14 @@ public class LambdaScopeDemo {
 
         //1.访问局部变量
         lambdaScopeDemo.localNumTest();
-
         //2.访问对象字段与静态变量
         lambdaScopeDemo.objectAndStaticTest();
         //3.不能访问接口的默认方法
-
+        lambdaScopeDemo.defaultMethodTest();
         //4.Lambda表达式中的this
+        lambdaScopeDemo.thisTest();
 
     }
-
 
     /**
      * localNumTest 方法是 1.lambda访问局部变量
@@ -78,5 +77,39 @@ public class LambdaScopeDemo {
         staticNum++;
         objectNum++;
         staticNumOperation.accept(0);
+    }
+
+
+    private void defaultMethodTest(){
+        System.out.println("3.测试访问接口的默认方法：");
+        /**
+         * 通过匿名内部类,可以在重写accept方法时调用IntConsumer的默认方法andThen
+         */
+        IntConsumer classTest = new IntConsumer() {
+            @Override
+            public void accept(int value) {
+                System.out.println("调用accept方法");
+                andThen((a)-> System.out.println("调用andThen方法"));
+            }
+
+        };
+        classTest.accept(0);
+
+
+//        IntConsumer test = (a)-> andThen(System.out::println);
+    }
+
+    /**
+     * thisTest 方法是 3.lambda表达式中的this测试
+     * 使用this会引用 该Lambda表达式的所在方法的this（即所在方法的类对象）
+     *
+     * @author dongyinggang
+     * @date 2020/10/14 8:07
+     */
+    private void thisTest(){
+        //调用 当前类的localNumTest方法
+        System.out.println("4.测试lambda表达式中的this：");
+        IntConsumer thisTest = (a)->this.localNumTest();
+        thisTest.accept(0);
     }
 }
