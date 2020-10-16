@@ -26,19 +26,19 @@ public class LambdaScopeDemo {
         LambdaScopeDemo lambdaScopeDemo = new LambdaScopeDemo();
 
         //1.访问局部变量/对象
-//        lambdaScopeDemo.localNumTest();
-//        lambdaScopeDemo.localObjTest();
-//        lambdaScopeDemo.alreadyDefinedDemo();
+        lambdaScopeDemo.localNumTest();
+        lambdaScopeDemo.localObjTest();
+        lambdaScopeDemo.alreadyDefinedDemo();
 //        2.访问对象字段与静态变量
-//        lambdaScopeDemo.objectAndStaticTest();
+        lambdaScopeDemo.objectAndStaticTest();
         //3.不能访问接口的默认方法
         lambdaScopeDemo.defaultMethodTest();
         //4.Lambda表达式中的this
 //        lambdaScopeDemo.thisTest();
 
         //5.综合理解Lambda表达式的作用域
-//        lambdaScopeDemo.repeatMessage("Hello world!", 20);
-//        System.out.println("repeatMessage方法调用已结束");
+        lambdaScopeDemo.repeatMessage("Hello world!", 20);
+        System.out.println("repeatMessage方法调用已结束");
     }
 
     /**
