@@ -171,18 +171,19 @@ public class LambdaScopeDemo {
             public void accept(int value) {
                 System.out.println(value + "调用accept方法,对value的第一次消费");
                 //调用本接口的默认方法,该方法返回一个IntConsumer对象,
-                // 该对象重写了accept方法,先调用当前accept方法,在调用其参数的accept方法
+                // 该对象重写了accept方法,先调用当前accept方法,再调用其参数的accept方法
+                // 这里只是进行返回未调用其accept方法，没问题，但如果在本方法体里调用andThen返回值的
+                // accept方法，就会导致死循环
                 andThen((a) -> System.out.println("andThen方法"));
             }
-
         };
-        // 先调用classTest的accept方法,再调用andThen的参数的accept方法
-        classTest.andThen((a) ->
-                System.out.println(a + "调用andThen方法参数重写的accept方法,对入参的第二次消费")).accept(0);
 
         //不能调用IntConsumer的默认方法andThen
 //        IntConsumer test = (tempField)-> andThen(System.out::println);
 
+        // 先调用classTest的accept方法,再调用andThen的参数的accept方法
+        classTest.andThen((a) ->
+                System.out.println(a + "调用andThen方法参数重写的accept方法,对入参的第二次消费")).accept(0);
     }
 
     /**
