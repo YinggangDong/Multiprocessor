@@ -132,8 +132,6 @@ public class DoubleColonDemo {
          */
         Arrays.sort(rosterAsArray, Person::compareByAge);
 
-
-
     }
 
     /**
@@ -171,7 +169,7 @@ public class DoubleColonDemo {
          */
         Comparator<Person> comparator = new ComparatorImpl();
         Arrays.sort(rosterAsArray1, comparator::compare);
-        //作为Comparator的实现类,可以简写为以下形式
+        //作为Comparator的实现类,可以简写为以下形式,上面的方式实际在运行过程中会生成匿名类
         Arrays.sort(rosterAsArray1, comparator);
         /**
          * 2.引用一个普通类的方法作为比较器
@@ -290,6 +288,9 @@ class ComparatorImpl implements Comparator<Person> {
     }
 }
 
+/**
+ * 含compareByAge方法的类
+ */
 class ComparatorProvider {
 
     public int compareByAge(Person a, Person b) {
