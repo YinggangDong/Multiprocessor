@@ -1,4 +1,4 @@
-package cn.dyg.lambda.statitmethod.java7.refactor;
+package cn.dyg.lambda.staticmethod.java7.refactor;
 
 /**
  * HasGoodsUuid 接口是 指示类拥有商品uuid。

@@ -1,4 +1,4 @@
-package cn.dyg.lambda.statitmethod.java8;
+package cn.dyg.lambda.staticmethod.java8;
 
 import lombok.Data;
 

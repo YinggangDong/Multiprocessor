@@ -1,6 +1,6 @@
-package cn.dyg.lambda.statitmethod.java7.old;
+package cn.dyg.lambda.staticmethod.java7.old;
 
-import cn.dyg.lambda.statitmethod.java7.refactor.GoodsLine;
+import cn.dyg.lambda.staticmethod.java7.refactor.GoodsLine;
 import lombok.Data;
 
 import java.util.Collection;
