@@ -1,4 +1,4 @@
-package cn.dyg.lambda.doublecolon;
+package cn.dyg.lambda.methodref;
 
 import java.util.Arrays;
 import java.util.List;

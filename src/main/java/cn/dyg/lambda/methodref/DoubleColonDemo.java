@@ -1,4 +1,4 @@
-package cn.dyg.lambda.doublecolon;
+package cn.dyg.lambda.methodref;
 
 /**
  * DoubleColonDemo 类是 双冒号应用demo
