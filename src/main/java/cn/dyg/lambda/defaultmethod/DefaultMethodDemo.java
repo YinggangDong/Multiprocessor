@@ -2,14 +2,13 @@ package cn.dyg.lambda.defaultmethod;
 
 /**
  * DefaultMethodDemo 类是接口默认方法demo类
- *
  * 参考内容：
  * 1.Java8 在接口的变化：
- *      https://blog.csdn.net/axuanqq/article/details/82773631
+ * https://blog.csdn.net/axuanqq/article/details/82773631
  * 2.接口默认方法
- *      https://blog.csdn.net/h294590501/article/details/80303722
+ * https://blog.csdn.net/h294590501/article/details/80303722
  * 3.JAVA8学习5-接口默认方法（default）
- *      https://blog.csdn.net/z_yemu/article/details/89312788?utm_medium=distribute.pc_relevant.none-task-blog-title-4&spm=1001.2101.3001.4242
+ * https://blog.csdn.net/z_yemu/article/details/89312788?utm_medium=distribute.pc_relevant.none-task-blog-title-4&spm=1001.2101.3001.4242
  *
  * @author dongyinggang
  * @date 2020-10-10 16:58
@@ -56,7 +55,6 @@ public class DefaultMethodDemo implements MyInterface {
 
     /**
      * staticMethod 方法是 接口实现类尝试重写接口的static方法
-     * <p>
      * 会发现并不能实现重写,加上 @Override 注解编译器会直接报错
      * "Method does not override method from its superclass"
      *
