@@ -14,6 +14,22 @@ import java.util.function.Supplier;
  **/
 public class Constructor {
 
+    private String name;
+
+    /**
+     * 无参构造
+     */
+    public Constructor(){
+    }
+
+    /**
+     * 有参构造
+     * @param name name值
+     */
+    public Constructor(String name){
+        this.name = name;
+    }
+
     /**
      * constructor 方法是 调用构造函数
      *
@@ -57,4 +73,44 @@ public class Constructor {
         //将新的集合对象放回
         return result;
     }
+
+    public static void main(String[] args) {
+        //通过方法调用重写create()方法
+        ConstructorFactory factory = Constructor::new;
+        Constructor constructor = factory.create();
+        System.out.println(constructor.name);
+
+        ConstructorFactory1 factory1 = Constructor::new;
+        Constructor constructor1 = factory1.create("有参");
+        System.out.println(constructor1.name);
+    }
+}
+
+/**
+ * ConstructorFactory 是Constructor的构造器
+ */
+interface ConstructorFactory{
+    /**
+     * create 方法是 待重写的返回Constructor实例的create()方法
+     *
+     * @return Constructor实例
+     * @author dongyinggang
+     * @date 2020/10/21 13:27
+     */
+    Constructor create();
+}
+
+/**
+ * ConstructorFactory1 是Constructor的构造器
+ */
+interface ConstructorFactory1{
+    /**
+     * create 方法是 待重写的返回Constructor实例的create()方法
+     *
+     * @param name name属性
+     * @return Constructor实例
+     * @author dongyinggang
+     * @date 2020/10/21 13:27
+     */
+    Constructor create(String name);
 }
