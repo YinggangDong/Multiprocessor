@@ -20,12 +20,8 @@ public class Constructor {
      * @author dongyinggang
      * @date 2020/10/10 15:14
      */
-    static void constructor(){
+    static void constructor(List<Person> roster){
         System.out.println("4.调用构造函数：");
-        List<Person> roster = Person.createRoster();
-        for (Person p : roster) {
-            p.printPerson();
-        }
         //1.通过匿名内部类实现get()方法,调用构造函数
         Set<Person> rosterSet = transferElements(roster, new Supplier<Set>(){
             @Override
@@ -47,7 +43,7 @@ public class Constructor {
      * transferElements 方法是 将一个collection的元素放到新的collection中去
      *
      * @param sourceCollection 源集合
-     * @param collectionFactory 集合工厂
+     * @param collectionFactory 集合工厂,重写get()方法的Supplier接口实现类
      * @return DEST的集合对象
      * @author dongyinggang
      * @date 2020/10/20 18:52

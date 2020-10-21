@@ -2,7 +2,6 @@ package cn.dyg.lambda.methodref;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 /**
  * ParticularObjInstanceMethod 类是 特定对象的实例方法的方法引用
@@ -18,15 +17,8 @@ public class ParticularObjInstanceMethod {
      * @author dongyinggang
      * @date 2020/10/10 10:23
      */
-    static void particularObjInstanceMethod() {
+    static void particularObjInstanceMethod(Person[] rosterAsArray) {
         System.out.println("2.调用特定对象的实例方法:");
-
-        List<Person> roster = Person.createRoster();
-        for (Person p : roster) {
-            p.printPerson();
-        }
-        Person[] rosterAsArray = roster.toArray(new Person[roster.size()]);
-        Person[] rosterAsArray1 = rosterAsArray.clone();
 
         /**
          * 1.使用Comparator的实现类作为比较器
@@ -46,9 +38,9 @@ public class ParticularObjInstanceMethod {
          *  -- Java8中对Lambda表达式中方法参数的类型推断（一） ：https://blog.csdn.net/u013096088/article/details/69367260
          */
         Comparator<Person> comparator = new ComparatorImpl();
-        Arrays.sort(rosterAsArray1, comparator::compare);
+        Arrays.sort(rosterAsArray, comparator::compare);
         //作为Comparator的实现类,可以简写为以下形式,上面的方式实际在运行过程中会生成匿名类
-        Arrays.sort(rosterAsArray1, comparator);
+        Arrays.sort(rosterAsArray, comparator);
         /**
          * 2.引用一个普通类的方法作为比较器
          *
@@ -56,10 +48,9 @@ public class ParticularObjInstanceMethod {
          * 如果直接使用 ComparatorProvider::compareByAge 会提示在 static 上下文中调用非静态方法
          */
         ComparatorProvider comparatorProvider = new ComparatorProvider();
-        Person[] rosterAsArray2 = rosterAsArray.clone();
-        Arrays.sort(rosterAsArray2, comparatorProvider::compareByAge);
+        Arrays.sort(rosterAsArray, comparatorProvider::compareByAge);
         System.out.println("排序完成：");
-        for (Person person : rosterAsArray2) {
+        for (Person person : rosterAsArray) {
             person.printPerson();
         }
 
@@ -67,7 +58,7 @@ public class ParticularObjInstanceMethod {
 }
 
 /**
- * Comparator的实现类
+ * Comparator接口的实现类
  */
 class ComparatorImpl implements Comparator<Person> {
 

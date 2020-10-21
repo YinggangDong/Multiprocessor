@@ -2,7 +2,6 @@ package cn.dyg.lambda.methodref;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 /**
  * StaticMethod 类是 静态方法的方法引用
@@ -19,13 +18,8 @@ public class StaticMethod {
      * @author dongyinggang
      * @date 2020/10/10 9:43
      */
-    static void staticMethod() {
+    static void staticMethod(Person[] rosterAsArray) {
         System.out.println("1.调用静态方法：");
-        List<Person> roster = Person.createRoster();
-        for (Person p : roster) {
-            p.printPerson();
-        }
-        Person[] rosterAsArray = roster.toArray(new Person[roster.size()]);
 
         /**
          * 年龄比较器类
@@ -88,7 +82,6 @@ public class StaticMethod {
          */
         Arrays.sort(rosterAsArray, (a, b) -> Person.compareByAge(a, b));
 
-
         /**
          * 4.调用已经存在的方法的最简形式
          *
@@ -98,6 +91,5 @@ public class StaticMethod {
          * - 它的主体调用该方法Person.compareByAge。
          */
         Arrays.sort(rosterAsArray, Person::compareByAge);
-
     }
 }

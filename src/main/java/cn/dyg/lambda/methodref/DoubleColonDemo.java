@@ -1,5 +1,7 @@
 package cn.dyg.lambda.methodref;
 
+import java.util.List;
+
 /**
  * DoubleColonDemo 类是 双冒号应用demo
  * “::” 是域操作符（也可以称作定界符、分隔符）。
@@ -20,17 +22,23 @@ public class DoubleColonDemo {
 
     public static void main(String[] args) {
 
+        List<Person> roster = Person.createRoster();
+        for (Person p : roster) {
+            p.printPerson();
+        }
+        Person[] rosterAsArray = roster.toArray(new Person[roster.size()]);
+
         //1.引用静态方法
-        StaticMethod.staticMethod();
+        StaticMethod.staticMethod(rosterAsArray);
 
         //2.调用特定对象的实例方法
-        ParticularObjInstanceMethod.particularObjInstanceMethod();
+        ParticularObjInstanceMethod.particularObjInstanceMethod(rosterAsArray);
 
         //3.调用特定类型的任意对象的实例方法
-        ParticularTypeInstanceMethod.particularTypeInstanceMethod();
+        ParticularTypeInstanceMethod.particularTypeInstanceMethod(rosterAsArray);
 
         //4.调用构造函数
-        Constructor.constructor();
+        Constructor.constructor(roster);
     }
 
 }

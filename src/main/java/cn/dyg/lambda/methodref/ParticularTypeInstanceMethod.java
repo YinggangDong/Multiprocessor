@@ -1,7 +1,6 @@
 package cn.dyg.lambda.methodref;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * ParticularTypeInstanceMethod 类是 特定类型任意对象的实例方法的方法引用
@@ -17,18 +16,13 @@ public class ParticularTypeInstanceMethod {
      * @author dongyinggang
      * @date 2020/10/10 11:29
      */
-    static void particularTypeInstanceMethod() {
+    static void particularTypeInstanceMethod(Person[] rosterAsArray) {
         System.out.println("3.调用特定类型任意对象的实例方法:");
         //官方文档示例
         String[] stringArray = {"Barbara", "James", "Mary", "John",
                 "Patricia", "Robert", "Michael", "Linda"};
         Arrays.sort(stringArray, String::compareToIgnoreCase);
 
-        List<Person> roster = Person.createRoster();
-        for (Person p : roster) {
-            p.printPerson();
-        }
-        Person[] rosterAsArray = roster.toArray(new Person[roster.size()]);
         /**
          * 刚开始考虑调用的方法是 compareByAgeNonStatic(Person a, Person b)
          * 有两个参数，结果发现会出现编译错误，提示在静态上下文中调用了非静态变量
@@ -45,10 +39,12 @@ public class ParticularTypeInstanceMethod {
          * 因此形式为一个对象调用来和另一个对象比较
          *
          */
+        //这里使用了类的名称，而不是具体的对象，尽管指定的是实例方法。
+        // 使用这种形式时，函数式接口的第一个参数匹配调用对象，第二个参数匹配方法指定的参数。
         Arrays.sort(rosterAsArray, Person::compareByAgeNonStatic);
         //和上方等价
         Arrays.sort(rosterAsArray, (a, b) -> a.compareByAgeNonStatic(b));
-        //如果调用 compareByAgeNonStatic(a,b) 实际是调用特定对象的实例方法
+        //如果调用 compareByAgeNonStatic(a,b) 实际是调用特定对象的实例方法,此时两个参数都是方法参数
         Arrays.sort(rosterAsArray, (a, b) -> new Person().compareByAgeNonStatic(a, b));
         System.out.println("排序完成：");
         for (Person person : rosterAsArray) {
