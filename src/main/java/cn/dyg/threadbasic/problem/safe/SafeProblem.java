@@ -4,6 +4,7 @@ import cn.dyg.util.ThreadUtil;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * SafeProblem 类是 线程安全问题相关类
@@ -13,12 +14,17 @@ import java.util.concurrent.ExecutorService;
  **/
 public class SafeProblem {
 
-    private long count = 0;
+    private static long count = 0;
+    /**
+     * jdk提供的线程安全的Long类型
+     */
+    private static AtomicLong atomicCount = new AtomicLong(count);
 
     public static void main(String[] args) {
         SafeProblem safeProblem = new SafeProblem();
         //1.测试实例变量的线程安全问题
         safeProblem.instanceVariable();
+        safeProblem.atomicTest();
     }
 
     public void instanceVariable() {
@@ -34,13 +40,13 @@ public class SafeProblem {
             executorService.execute(() -> {
                 System.out.println("子线程" + Thread.currentThread().getName() + "开始执行");
                 //加锁,则可以获取正确的count结果,不加锁,则结果值会出现问题
-                synchronized (this) {
-                    //循环次数
-                    int cycleTime = 10000000;
-                    for (int j = 0; j < cycleTime; j++) {
-                        count++;
-                    }
+//                synchronized (this) {
+                //循环次数
+                int cycleTime = 10000000;
+                for (int j = 0; j < cycleTime; j++) {
+                    count++;
                 }
+//                }
                 System.out.println("子线程" + Thread.currentThread().getName() + "执行完成");
                 //当前子线程调用此方法，则计数减一
                 latch.countDown();
@@ -55,6 +61,46 @@ public class SafeProblem {
             executorService.shutdown();
             System.out.println("主线程" + Thread.currentThread().getName()
                     + "开始执行...count为" + count);
+            System.out.println("耗时：" + (System.currentTimeMillis() - start) + "ms");
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void atomicTest() {
+        //1.创建线程池
+        int threadSize = 10;
+        ExecutorService executorService = ThreadUtil.buildThreadExecutor(threadSize);
+        //2.创建线程计数器
+        final CountDownLatch latch = new CountDownLatch(threadSize);
+        long start = System.currentTimeMillis();
+        //3.通过线程池启动10个线程进行count的运算
+        for (int i = 0; i < threadSize; i++) {
+            executorService.execute(() -> {
+                System.out.println("子线程" + Thread.currentThread().getName() + "开始执行");
+                //循环次数
+                int cycleTime = 10000000;
+                for (int j = 0; j < cycleTime; j++) {
+                    //通过调用jdk提供的原子类,可以不需要加锁,但是效率会低很多,
+                    // 本方法和上面加锁版的代码的效率都有10倍差距
+                    atomicCount.incrementAndGet();
+                }
+//                }
+                System.out.println("子线程" + Thread.currentThread().getName() + "执行完成");
+                //当前子线程调用此方法，则计数减一
+                latch.countDown();
+
+            });
+        }
+        try {
+
+            System.out.println("主线程" + Thread.currentThread().getName()
+                    + "等待子线程执行完成...");
+            latch.await();//阻塞当前线程，直到计数器的值为0
+            executorService.shutdown();
+            System.out.println("主线程" + Thread.currentThread().getName()
+                    + "开始执行...atomicCount为" + atomicCount);
             System.out.println("耗时：" + (System.currentTimeMillis() - start) + "ms");
 
         } catch (InterruptedException e) {
