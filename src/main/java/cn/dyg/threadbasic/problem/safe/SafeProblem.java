@@ -22,19 +22,24 @@ public class SafeProblem {
     }
 
     public void instanceVariable() {
+
         //1.创建线程池
         int threadSize = 10;
         ExecutorService executorService = ThreadUtil.buildThreadExecutor(threadSize);
         //2.创建线程计数器
         final CountDownLatch latch = new CountDownLatch(threadSize);
+        long start = System.currentTimeMillis();
         //3.通过线程池启动10个线程进行count的运算
         for (int i = 0; i < threadSize; i++) {
             executorService.execute(() -> {
                 System.out.println("子线程" + Thread.currentThread().getName() + "开始执行");
-                //循环次数
-                int cycleTime = 10000;
-                for (int j = 0; j < cycleTime; j++) {
-                    count++;
+                //加锁,则可以获取正确的count结果,不加锁,则结果值会出现问题
+                synchronized (this) {
+                    //循环次数
+                    int cycleTime = 10000000;
+                    for (int j = 0; j < cycleTime; j++) {
+                        count++;
+                    }
                 }
                 System.out.println("子线程" + Thread.currentThread().getName() + "执行完成");
                 //当前子线程调用此方法，则计数减一
@@ -50,11 +55,10 @@ public class SafeProblem {
             executorService.shutdown();
             System.out.println("主线程" + Thread.currentThread().getName()
                     + "开始执行...count为" + count);
+            System.out.println("耗时：" + (System.currentTimeMillis() - start) + "ms");
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
     }
 }
