@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicStampedReference;
 
 /**
- * AtomicTest 类是
+ * AtomicTest 类是 测试原子类
  *
  * @author dongyinggang
  * @date 2020-07-07 22:50
