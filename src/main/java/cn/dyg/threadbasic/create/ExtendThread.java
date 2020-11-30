@@ -20,7 +20,7 @@ public class ExtendThread extends  Thread{
         while(flag){
             System.out.println(name + "is running");
             try {
-                Thread.sleep(2000);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
