@@ -22,7 +22,6 @@ public class ThreadSourceTest {
     public static void noArgsConstructor(){
         Thread thread = new Thread();
         System.out.println(thread.getName());
-        System.out.println("id:"+thread.getId());
         thread.start();
     }
 }
