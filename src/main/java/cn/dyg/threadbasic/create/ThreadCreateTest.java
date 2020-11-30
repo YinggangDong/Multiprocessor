@@ -40,10 +40,8 @@ public class ThreadCreateTest {
     }
 
     /**
-     * implTest 方法是 实现Runnable接口的线程类实例()
+     * implTest 方法是 实现Runnable接口的线程类实例
      *
-     * @param
-     * @return
      * @author dongyinggang
      * @date 2020/11/30 8:20
      */
@@ -101,7 +99,17 @@ public class ThreadCreateTest {
 
         new Thread(futureTask).start();
 
+
         try {
+            //cancel方法不做展开
+//            futureTask.cancel(true);
+
+            while (!futureTask.isDone()) {
+                System.out.println("futureTask未完成");
+                Thread.sleep(1);
+            }
+
+            //通过get方法接收线程返回值,get方法会阻塞线程,直到返回结果
             Integer sum = futureTask.get();
             System.out.println("实现callable接口的线程计算结果：" + sum);
 
