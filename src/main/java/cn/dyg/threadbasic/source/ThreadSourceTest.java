@@ -12,7 +12,8 @@ public class ThreadSourceTest {
 
     public static void main(String[] args) {
 //        constructor();
-        threadName();
+//        threadName();
+        daemonTest();
     }
 
     /**
@@ -89,6 +90,28 @@ public class ThreadSourceTest {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    /**
+     * daemonTest 方法是 守护线程测试
+     *
+     * @author dongyinggang
+     * @date 2020/12/1 20:18
+     */
+    public static void daemonTest() {
+        //创建守护线程实例
+        DaemonThread daemonThread = new DaemonThread();
+        Thread daemon = new Thread(daemonThread, "守护线程---->");
+
+        //声明为守护线程并启动
+        daemon.setDaemon(true);
+        daemon.start();
+        try {
+            //尽管守护线程中是个死循环,但随着主线程结束而终止
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

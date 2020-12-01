@@ -58,27 +58,6 @@ public class ThreadCreateTest {
 
     }
 
-    public static void daemonTest() {
-        //创建守护线程实例
-        DaemonThread daemonThread = new DaemonThread();
-        Thread thread = new Thread(daemonThread, "守护线程---->");
-
-        //声明为守护线程并启动
-        thread.setDaemon(true);
-        thread.start();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        thread.setName("守护线程改名了---->");
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * callableTest 方法是 通过实现 callable 接口创建线程,
