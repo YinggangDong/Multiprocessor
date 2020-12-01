@@ -11,8 +11,8 @@ import cn.dyg.threadbasic.create.ImplRunnable;
 public class ThreadSourceTest {
 
     public static void main(String[] args) {
-        constructor();
-//        threadName();
+//        constructor();
+        threadName();
     }
 
     /**
@@ -44,6 +44,8 @@ public class ThreadSourceTest {
 
     /**
      * threadName 方法是 设置线程名称的两种方式
+     * 1.通过构造方法设置线程名称
+     * 2.通过setName方法设置线程名称
      * 注：
      * 若没有指定线程名称,会使用"Thread-x"(x指线程初始数量,是 Thread 类的 threadInitNumber)
      *
@@ -56,7 +58,7 @@ public class ThreadSourceTest {
 
         thread.start();
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -64,7 +66,7 @@ public class ThreadSourceTest {
         //2.通过setName方法设置线程名称
         thread.setName("t-2");
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -78,16 +80,15 @@ public class ThreadSourceTest {
      */
     private static void outputThreadName(){
         int i = 0;
-        int times = 30;
+        int times = 4;
         while(i<times){
             System.out.println(Thread.currentThread().getName()+" is running");
             try {
                 i++;
-                Thread.sleep(300);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
     }
 }
