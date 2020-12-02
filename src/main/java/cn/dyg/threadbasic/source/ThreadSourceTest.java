@@ -13,7 +13,8 @@ public class ThreadSourceTest {
     public static void main(String[] args) {
 //        constructor();
 //        threadName();
-        daemonTest();
+//        daemonTest();
+        priorityTest();
     }
 
     /**
@@ -113,5 +114,20 @@ public class ThreadSourceTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * priorityTest 方法是 线程优先级示例代码
+     *
+     * @author dongyinggang
+     * @date 2020/12/2 9:00
+     */
+    public static void priorityTest(){
+        Thread thread = new Thread(new ImplRunnable("r-1"));
+        System.out.println("安全管理器："+System.getSecurityManager());
+        System.out.println(thread.getThreadGroup()+"线程组最大的优先级："+thread.getThreadGroup().getMaxPriority());
+        System.out.println("原线程优先级："+thread.getPriority());
+        thread.setPriority(6);
+        System.out.println("修改后的线程优先级："+thread.getPriority());
     }
 }
