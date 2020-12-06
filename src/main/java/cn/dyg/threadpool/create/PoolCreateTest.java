@@ -12,6 +12,14 @@ import java.util.concurrent.Executors;
 public class PoolCreateTest {
 
     public static void main(String[] args) throws InterruptedException {
+        cachedThreadPoolTest();
+    }
+
+    /**
+     * Executors提供了四种默认的线程池创建方法
+     * 1.创建一个缓存线程池cachedThreadPool
+     */
+    public static void cachedThreadPoolTest() throws InterruptedException{
         //创建一个缓存线程池cachedThreadPool
         ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
         for (int i = 0; i < 10; i++) {

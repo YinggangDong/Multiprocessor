@@ -8,19 +8,18 @@ package cn.dyg.keyword.cas;
  **/
 public class Test {
 
-    static volatile Integer a = 1;
     public static void main(String[] args) {
-
-        subThread subThread = new subThread(a);
+        Integer a = 1;
+        //1.创建一个子线程,并且start该线程
+        SubThread subThread = new SubThread(a);
         new Thread(subThread).start();
-
+        new Thread(subThread).start();
+        //2.线程sleep 0.1s,查看主线程的a值是否变化——不变化
         try {
-            Thread.sleep(5000);
-            System.out.println(a);
+            Thread.sleep(100);
+            System.out.println("主线程的a："+a);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        new Thread(subThread).start();
     }
 }

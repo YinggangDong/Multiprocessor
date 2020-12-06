@@ -21,7 +21,7 @@ public class ImplRunnable implements Runnable{
         while(flag){
             System.out.println(name + "is running");
             try {
-                Thread.sleep(3000);
+                Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
