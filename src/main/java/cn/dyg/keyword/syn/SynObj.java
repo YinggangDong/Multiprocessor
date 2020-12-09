@@ -9,8 +9,8 @@ package cn.dyg.keyword.syn;
  **/
 public class SynObj {
 
-    Object object1 = new Object();
-    Object object2 = new Object();
+    private final Object object1 = new Object();
+    private final Object object2 = new Object();
 
     /**
      * staticMethod 给静态方法付加锁,锁的是SynObj类
@@ -38,15 +38,40 @@ public class SynObj {
     }
 
     /**
-     * test2 方法是 给代码块加synchronized锁
+     * synchronizedBlock 方法是 给代码块加synchronized锁
      * 如果是加this的话，实际与给实例方法加synchronized一样，都是锁了本类的实例
      *
      * @author dongyinggang
      * @date 2020/11/27 16:39
      */
-    public synchronized void synchroniazeBlock(){
+    public synchronized void synchronizedBlock(){
         // 修饰代码块
         synchronized (this){
+            while (true){
+                System.out.println(Thread.currentThread().getName());
+            }
+        }
+    }
+
+    /**
+     * synchronizedBlockObj1 方法是 两个方法分别锁不同的对象
+     * 这样对两个对象分别加锁，实际上是互不影响的，可以分别执行，不会阻塞另一个线程
+     *
+     * @author dongyinggang
+     * @date 2020/12/9 19:41
+     */
+    public void synchronizedBlockObj1(){
+        // 修饰代码块
+        synchronized (object1){
+            while (true){
+                System.out.println(Thread.currentThread().getName());
+            }
+        }
+    }
+
+    public void synchronizedBlockObj2(){
+        // 修饰代码块
+        synchronized (object2){
             while (true){
                 System.out.println(Thread.currentThread().getName());
             }
