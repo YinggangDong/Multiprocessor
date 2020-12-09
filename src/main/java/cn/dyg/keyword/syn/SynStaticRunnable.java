@@ -18,12 +18,14 @@ public class SynStaticRunnable implements Runnable {
     public void run() {
         //调用加锁的静态方法
         SynObj.staticMethod();
+        //如果使用实例来调用静态方法,编译器会提示但运行不会报错,不建议这样用
+//        synObj.staticMethod();
     }
 
     public static void main(String[] args) {
         twoThreadTwoInstance();
         //其他方法依然可以正常调用。
-        doSomething();
+//        doSomething();
     }
 
     /**
