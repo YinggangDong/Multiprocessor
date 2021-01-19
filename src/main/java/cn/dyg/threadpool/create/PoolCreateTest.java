@@ -17,11 +17,6 @@ public class PoolCreateTest {
     }
 
     /**
-     *
-     * 特点
-     * 1.这是一个线程数量可以“无限”扩大（不能超过整型最大值）的线程池；
-     */
-    /**
      * cachedThreadPoolTest 方法是 测试cached线程池
      * 特点
      * 1.这是一个线程数量可以“无限”扩大（不能超过整型最大值）的线程池；
