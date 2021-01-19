@@ -1,7 +1,11 @@
 package cn.dyg.threadpool.create;
 
+import java.time.LocalDateTime;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * PoolCreateTest 类是 线程池创建Test
@@ -14,6 +18,7 @@ public class PoolCreateTest {
 
     public static void main(String[] args) throws InterruptedException {
         cachedThreadPoolTest();
+//        ScheduledThreadPoolTest();
     }
 
     /**
@@ -74,19 +79,32 @@ public class PoolCreateTest {
      * @author dongyinggang
      * @date 2021/1/18 19:17
      */
-    private static void SingleThreadPoolTest(){
-        ExecutorService SingleThreadPool = Executors.newSingleThreadExecutor();
+    private static void SingleThreadPoolTest() {
+        ExecutorService singleThreadPool = Executors.newSingleThreadExecutor();
         for (int i = 0; i < 10; i++) {
-            SingleThreadPool.execute(() ->
+            singleThreadPool.execute(() ->
                     System.out.println(Thread.currentThread().getName() + " is running"));
         }
     }
 
-    private static void ScheduledThreadPoolTest(){
-        ExecutorService ScheduledThreadPool = Executors.newScheduledThreadPool(3);
-        for (int i = 0; i < 10; i++) {
-            ScheduledThreadPool.execute(() ->
-                    System.out.println(Thread.currentThread().getName() + " is running"));
+    private static void ScheduledThreadPoolTest() {
+        AtomicInteger number = new AtomicInteger();
+        ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(2);
+
+        for (int i = 0; i < 3; i++) {
+            scheduledThreadPool.schedule(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println("第" + number.incrementAndGet() + "周期线程运行当前时间【" +
+                            LocalDateTime.now() + "】");
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, 3L, TimeUnit.SECONDS);
         }
+        System.out.println("主线程运行,当前时间【" +LocalDateTime.now() + "】");
     }
 }
