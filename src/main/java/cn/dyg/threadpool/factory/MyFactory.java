@@ -35,12 +35,12 @@ public class MyFactory implements ThreadFactory {
 
 
     /**
-     * Constructs a new {@code Thread}.  Implementations may also initialize
-     * priority, name, daemon status, {@code ThreadGroup}, etc.
+     * newThread 方法是 线程创建方法
      *
-     * @param r a runnable to be executed by new thread instance
-     * @return constructed thread, or {@code null} if the request to
-     * create a thread is rejected
+     * @param r runnable对象
+     * @return 线程
+     * @author dongyinggang
+     * @date 2021/1/19 19:58
      */
     @Override
     public Thread newThread(Runnable r) {
