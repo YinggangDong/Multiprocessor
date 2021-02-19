@@ -8,50 +8,45 @@ package cn.dyg.threadbasic.lifecycle;
  **/
 public class ThreadInterruptTest {
     public static void main(String[] args) throws InterruptedException {
-        ThreadInterruptTest threadInterruptTest = new ThreadInterruptTest();
-        Thread thread = new Thread(threadInterruptTest.runnable);
+        //1.创建并启动线程
+        Thread thread = new Thread(runnable, "sub-thread");
         thread.start();
-
-        //1.主线程睡眠3s，会去执行thread的 interrupt 操作
-        try {
-            Thread.sleep(3000);
-            //这里调用 join 方法后，下面的 interrupt 就不会在 thread 的输出执行完（用时10s）之前被调用了，
-            thread.join();
-        } catch (InterruptedException e) {
-            System.out.println("In Main");
-            e.printStackTrace();
-        }
-
-        //调用 interrupt 方法进行线程的中止，会设置一个终止标志，但实际并不强制终止，由子线程自己考虑终止时间
-        Long start= System.currentTimeMillis();
+        System.out.println("终断前子线程状态" + thread.getState());
+        //2.调用 interrupt 方法进行线程的中止，会设置一个中断标志，但实际并不强制中断，由子线程自己考虑中断时间
         thread.interrupt();
-        //终止标志始终未变,原因是什么？
-        while(!thread.isInterrupted()){
-            System.out.println("子线程是否处于中断状态：" + thread.isInterrupted());
-            Thread.sleep(1000);
-        }
-        System.out.println("子线程调用interrupt方法"+(System.currentTimeMillis()-start)+"ms后，进入了中止状态");
-
+        //3.主线程休眠2s后再看子线程状态
+        Thread.sleep(2000);
+        //4.成功中断后,线程处于 TERMINATED 状态,中断标志为 false
+        System.out.println("--------------- 经过 2s 的等待后 ---------------");
+        System.out.println("终断后子线程状态 " + thread.getState() + "\n中断标志：" + thread.isInterrupted());
 
     }
 
     /**
      * 通过lambda表达式声明一个Runnable对象
      */
-    Runnable runnable = () -> {
+    static Runnable runnable = () -> {
         int i = 0;
         //子线程每隔500ms就输出一次i值并+1
         try {
-            while (i < 20) {
+            int times = 10;
+            //2a.如果主线程中断操作成功,则会结束循环
+            while (i < times && !Thread.currentThread().isInterrupted()) {
+                System.out.println("子线程输出" + i++);
+                //2b.如果处于阻塞状态(可由wait、sleep、join三个方法引起),会抛出InterruptedException异常,被捕获
                 Thread.sleep(500);
-                System.out.println(i++);
             }
+            System.out.println("子线程输出完毕");
         } catch (InterruptedException e) {
-            //当子线程在 sleep 时调用了 interrupt 方法，会报错，此时线程依旧存活
-            System.out.println("线程是否存活：" + Thread.currentThread().isAlive());
+            //当子线程抛出异常，线程依旧存活,且中断状态被置为false
+            System.out.println("线程被中断时的状态：" + Thread.currentThread().getState());
             System.out.println("线程是否处于中断状态：" + Thread.currentThread().isInterrupted());
-            System.out.println("In Runnable");
             e.printStackTrace();
+            //捕获到异常后，需要重新进行中断,才会将中断状态变更为true
+            Thread.currentThread().interrupt();
+            System.out.println("再次中断后:");
+            System.out.println("线程是否处于中断状态：" + Thread.currentThread().isInterrupted());
+            System.out.println("线程再次中断后的状态：" + Thread.currentThread().getState());
         }
     };
 }
