@@ -2,6 +2,7 @@ package cn.dyg.threadbasic.lifecycle;
 
 /**
  * JoinTest 类是 join 方法测试
+ * 挂起当前线程，等待目标线程结束
  *
  * @author dongyinggang
  * @date 2021-02-20 11:17
