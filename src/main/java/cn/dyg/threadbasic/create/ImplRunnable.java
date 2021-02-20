@@ -6,19 +6,19 @@ package cn.dyg.threadbasic.create;
  * @author dongyinggang
  * @date 2020-07-08 14:30
  **/
-public class ImplRunnable implements Runnable{
+public class ImplRunnable implements Runnable {
 
     private String name;
 
     private boolean flag = true;
 
-    public ImplRunnable(String name){
+    public ImplRunnable(String name) {
         this.name = name;
     }
 
     @Override
     public void run() {
-        while(flag){
+        while (flag) {
             System.out.println(name + "is running");
             try {
                 Thread.sleep(300);
@@ -28,7 +28,7 @@ public class ImplRunnable implements Runnable{
         }
     }
 
-    public void exit(){
+    public void exit() {
         this.flag = false;
     }
 }

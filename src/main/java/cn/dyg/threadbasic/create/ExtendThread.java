@@ -6,18 +6,18 @@ package cn.dyg.threadbasic.create;
  * @author dongyinggang
  * @date 2020-07-08 14:21
  **/
-public class ExtendThread extends  Thread{
+public class ExtendThread extends Thread {
 
     private String name;
     private boolean flag = true;
 
-    public ExtendThread(String name){
+    public ExtendThread(String name) {
         this.name = name;
     }
 
     @Override
-    public void run(){
-        while(flag){
+    public void run() {
+        while (flag) {
             System.out.println(name + "is running");
             try {
                 Thread.sleep(200);
@@ -27,7 +27,7 @@ public class ExtendThread extends  Thread{
         }
     }
 
-    public void exit(){
+    public void exit() {
         this.flag = false;
     }
 }

@@ -25,7 +25,7 @@ public class CallableThread implements Callable<Integer> {
     public Integer call() throws Exception {
         int sum = 0;
         for (int i = 0; i < 100000; i++) {
-            sum +=i;
+            sum += 1;
         }
         return sum;
     }
