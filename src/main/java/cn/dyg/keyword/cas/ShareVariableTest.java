@@ -22,31 +22,31 @@ public class ShareVariableTest {
 
     public static void runnableTest() throws InterruptedException {
         //新建对象，准备传递给线程
-        Num i = new Num(0);
+        Num num = new Num(0);
         int threadSize = 4;
         CountDownLatch latch = new CountDownLatch(threadSize);
-        OwnRunnable ownRunnable = new OwnRunnable(i, latch);
+        OwnRunnable ownRunnable = new OwnRunnable(num, latch);
         for (int j = 0; j < threadSize; j++) {
             //新建线程，并启动
             new Thread(ownRunnable).start();
         }
         latch.await();
         //获取目前对象i的数值
-        System.out.println("主线程中i的值变为了：" + i.i);
+        System.out.println("主线程中i的值变为了：" + num.i);
     }
 
     public static void threadTest() throws InterruptedException {
         //新建对象，准备传递给线程
-        Num i = new Num(0);
+        Num num = new Num(0);
         int threadSize = 4;
         CountDownLatch latch = new CountDownLatch(threadSize);
         for (int j = 0; j < threadSize; j++) {
             //新建线程，并启动
-            new OwnThread(i, latch).start();
+            new OwnThread(num, latch).start();
         }
         latch.await();
         //获取目前对象i的数值
-        System.out.println("主线程中i的值变为了：" + i.i);
+        System.out.println("主线程中i的值变为了：" + num.i);
     }
 }
 
@@ -74,7 +74,8 @@ class OwnThread extends Thread {
     public void run() {
         int count = 1000;
         for (int i = 0; i < count; i++) {
-            //这里如果锁this的话会出问题,
+            //这里如果锁this的话会出问题,每个新的子线程都是新的线程变量，但其中的id都是同一个对象
+            //所以锁this没用，各锁各的，锁this.id才能锁住,让各子线程竞争锁
             synchronized (this.id) {
                 //保存id.i的数值，到线程私有变量sno
                 sno = id.i;
