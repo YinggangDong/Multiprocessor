@@ -29,7 +29,7 @@ public class ThreadUtil {
 
     }
 
-    public static ThreadFactory buildThreadFactory(String prefix) {
+    private static ThreadFactory buildThreadFactory(String prefix) {
         return new SelfThreadFactory(prefix);
     }
 

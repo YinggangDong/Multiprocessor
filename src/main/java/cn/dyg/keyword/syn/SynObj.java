@@ -9,6 +9,7 @@ package cn.dyg.keyword.syn;
  **/
 public class SynObj {
 
+    private static final int FIVE_INT = 5;
     private final Object lock1 = new Object();
     private final Object lock2 = new Object();
 
@@ -18,9 +19,14 @@ public class SynObj {
      * @author dongyinggang
      * @date 2020/12/9 13:11
      */
-    public synchronized static void staticMethod(){
-        while (true){
+    synchronized static void staticMethod() {
+        for (int i = 0; i < FIVE_INT; i++) {
             System.out.println(Thread.currentThread().getName());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -31,8 +37,8 @@ public class SynObj {
      * @author dongyinggang
      * @date 2020/11/27 16:28
      */
-    public synchronized void instanceMethod(){
-        while (true){
+    synchronized void instanceMethod() {
+        for (int i = 0; i < FIVE_INT; i++) {
             System.out.println(Thread.currentThread().getName());
         }
     }
@@ -44,19 +50,19 @@ public class SynObj {
      * @author dongyinggang
      * @date 2020/11/27 16:39
      */
-    public synchronized void synchronizedBlock(){
+    synchronized void synchronizedBlock() {
         // 修饰代码块
         synchronized (this){
-            while (true){
+            for (int i = 0; i < FIVE_INT; i++) {
                 System.out.println(Thread.currentThread().getName());
             }
         }
     }
 
-    public synchronized void synchronizedBlockThis(){
+    synchronized void synchronizedBlockThis() {
         // 修饰代码块
         synchronized (this){
-            while (true){
+            for (int i = 0; i < FIVE_INT; i++) {
                 System.out.println(Thread.currentThread().getName());
             }
         }
@@ -69,19 +75,19 @@ public class SynObj {
      * @author dongyinggang
      * @date 2020/12/9 19:41
      */
-    public void synchronizedBlockObj1(){
+    void synchronizedBlockObj1() {
         // 修饰代码块
         synchronized (lock1){
-            while (true){
+            for (int i = 0; i < FIVE_INT; i++) {
                 System.out.println(Thread.currentThread().getName());
             }
         }
     }
 
-    public void synchronizedBlockObj2(){
+    void synchronizedBlockObj2() {
         // 修饰代码块
         synchronized (lock2){
-            while (true){
+            for (int i = 0; i < FIVE_INT; i++) {
                 System.out.println(Thread.currentThread().getName());
             }
         }
