@@ -11,28 +11,22 @@ import org.openjdk.jol.info.ClassLayout;
 public class JavaObjectLayoutTest {
 
     public static void main(String[] args) {
+        testLockFlag();
+    }
+
+    /**
+     * testLockFlag 方法是 测试加锁对对象头的影响
+     *
+     * @author dongyinggang
+     * @date 2021/2/23 15:45
+     */
+    private static void testLockFlag() {
         Object o = new Object();
         System.out.println(ClassLayout.parseInstance(o).toPrintable());
 
         synchronized (o){
             System.out.println(ClassLayout.parseInstance(o).toPrintable());
         }
-
-
-        A a = new A();
-        System.out.println(ClassLayout.parseInstance(a).toPrintable());
-
-        B b = new B();
-        System.out.println(ClassLayout.parseInstance(b).toPrintable());
     }
 }
 
-class A{
-    private long l;
-}
-
-class B{
-    private double s;
-    private int i;
-
-}
