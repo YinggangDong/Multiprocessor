@@ -11,7 +11,10 @@ import org.openjdk.jol.info.ClassLayout;
 public class JavaObjectLayoutTest {
 
     public static void main(String[] args) {
-        testLockFlag();
+        //锁对对象头信息的变更
+//        testLockFlag();
+        //数组对象头信息
+        arrayObjectHeader();
     }
 
     /**
@@ -27,6 +30,18 @@ public class JavaObjectLayoutTest {
         synchronized (o){
             System.out.println(ClassLayout.parseInstance(o).toPrintable());
         }
+    }
+
+    /**
+     * arrayObjectHeader 方法是 数组的对象头信息
+     *
+     * @author dongyinggang
+     * @date 2021/2/24 8:24
+     */
+    private static void arrayObjectHeader() {
+        String[] arrays = new String[258];
+        arrays[0] = "hello world";
+        System.out.println(ClassLayout.parseInstance(arrays).toPrintable());
     }
 }
 
