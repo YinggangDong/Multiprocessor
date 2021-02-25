@@ -10,13 +10,13 @@ package cn.dyg.keyword.jol;
 public class BufferTest {
 
     public static void main(String[] args) {
-        int[][] array = new int[64 * 1024][1024];
+        int[][] array = new int[5000][5000];
 
         // 纵向遍历
         System.out.println("纵向遍历开始");
         long start = System.currentTimeMillis();
-        for (int i = 0; i < 1024; i++) {
-            for (int j = 0; j < 64 * 1024; j++) {
+        for (int i = 0; i < 5000; i++) {
+            for (int j = 0; j < 5000; j++) {
                 array[j][i]++;
             }
         }
@@ -25,8 +25,8 @@ public class BufferTest {
         // 横向遍历
         System.out.println("横向遍历开始");
         start = System.currentTimeMillis();
-        for (int i = 0; i < 64 * 1024; i++) {
-            for (int j = 0; j < 1024; j++) {
+        for (int i = 0; i < 5000; i++) {
+            for (int j = 0; j < 5000; j++) {
                 array[i][j]++;
             }
         }
