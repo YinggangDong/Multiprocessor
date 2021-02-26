@@ -22,7 +22,7 @@ public class VolatileTest {
         }
 
         Thread.sleep(3000);
-        //结果很大可能不为200000
+        //结果很大可能小于200000
         System.out.println(volatileTest.volObj);
         executorService.shutdown();
 
