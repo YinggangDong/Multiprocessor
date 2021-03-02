@@ -22,12 +22,18 @@ public class VolatileTest {
         }
 
         Thread.sleep(3000);
-        //结果很大可能小于200000
+        //结果极大可能小于200000
         System.out.println(volatileTest.volObj);
         executorService.shutdown();
 
     }
 
+    /**
+     * increase 方法是 对volatile变量进行一万次++操作
+     *
+     * @author dongyinggang
+     * @date 2021/3/1 17:54
+     */
     private void increase() {
         for (int i = 0; i < 10000; i++) {
             volObj++;
