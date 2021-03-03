@@ -29,7 +29,13 @@ public class SafeProblem {
         safeProblem.atomicTest();
     }
 
-    public void instanceVariable() {
+    /**
+     * instanceVariable 方法是 实例变量值的线程安全测试
+     *
+     * @author dongyinggang
+     * @date 2021/3/2 11:28
+     */
+    private void instanceVariable() {
 
         //1.创建线程池
         int threadSize = 4;
@@ -59,7 +65,9 @@ public class SafeProblem {
 
             System.out.println("主线程" + Thread.currentThread().getName()
                     + "等待子线程执行完成...");
-            latch.await();//阻塞当前线程，直到计数器的值为0
+            //阻塞当前线程，直到计数器的值为0
+            latch.await();
+            //关闭线程池
             executorService.shutdown();
             System.out.println("主线程" + Thread.currentThread().getName()
                     + "开始执行...count为" + count);
@@ -70,7 +78,13 @@ public class SafeProblem {
         }
     }
 
-    public void atomicTest() {
+    /**
+     * atomicTest 方法是 jdk提供的原子性对象,不需要加锁即可进行
+     *
+     * @author dongyinggang
+     * @date 2021/3/2 11:29
+     */
+    private void atomicTest() {
         //1.创建线程池
         int threadSize = 4;
         ExecutorService executorService = ThreadUtil.buildThreadExecutor(threadSize);
@@ -98,7 +112,9 @@ public class SafeProblem {
 
             System.out.println("主线程" + Thread.currentThread().getName()
                     + "等待子线程执行完成...");
-            latch.await();//阻塞当前线程，直到计数器的值为0
+            //阻塞当前线程，直到计数器的值为0
+            latch.await();
+            //关闭线程池
             executorService.shutdown();
             System.out.println("主线程" + Thread.currentThread().getName()
                     + "开始执行...atomicCount为" + atomicCount);
