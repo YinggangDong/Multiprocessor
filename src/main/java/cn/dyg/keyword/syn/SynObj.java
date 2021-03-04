@@ -69,7 +69,7 @@ public class SynObj {
     }
 
     /**
-     * synchronizedBlockObj1 和 synchronizedBlockObj1 方法是 两个方法分别锁不同的对象
+     * synchronizedBlockObj1 和 synchronizedBlockObj2 方法是 两个方法分别锁不同的对象
      * 这样对两个对象分别加锁，实际上是互不影响的，可以分别执行，不会阻塞另一个线程
      *
      * @author dongyinggang
