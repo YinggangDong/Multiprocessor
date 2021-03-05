@@ -19,10 +19,10 @@ import java.util.concurrent.TimeUnit;
 public class LockFlagTest {
 
     public static void main(String[] args) throws InterruptedException {
-        noLock();
+//        noLock();
 //        biasedLock();
 //        lightLock();
-//        heavyLock();
+        heavyLock();
     }
 
     /**
@@ -69,7 +69,7 @@ public class LockFlagTest {
 
     /**
      * lightLock 方法是 轻量级锁
-     * 两个或以上线程依此获取锁且未发生竞争时，变为轻量级锁
+     * 两个或以上线程交替获取锁且未发生竞争时，变为轻量级锁
      *
      * @author dongyinggang
      * @date 2021/3/4 18:01
@@ -103,22 +103,33 @@ public class LockFlagTest {
 
     }
 
+    /**
+     * heavyLock 方法是 重量级锁测试
+     * 两个或以上线程同时竞争锁时，膨胀为重量级锁
+     *
+     * @author dongyinggang
+     * @date 2021/3/5 14:01
+     */
     private static void heavyLock() throws InterruptedException {
         TimeUnit.SECONDS.sleep(5);
         Object obj = new Object();
         System.out.println("另起线程前,处于偏向锁态");
         System.out.println(ClassLayout.parseInstance(obj).toPrintable());
-        //4.重量级锁 多个线程争夺 obj 的 monitor 锁,直接升级为重量级锁
-        for (int i = 0; i < 2; i++) {
-            new Thread(() -> {
-                synchronized (obj) {
-                    System.out.println("两个线程竞争,进入重量级锁状态");
-                    System.out.println(ClassLayout.parseInstance(obj).toPrintable());
-                }
-            }).start();
+        //第一次结束后,obj 处于无锁态,第二次,再次膨胀为重量级锁,再次结束后,又处于无锁态了
+        for (int j = 0; j < 2; j++) {
+            //4.重量级锁 多个线程争夺 obj 的 monitor 锁,直接膨胀为重量级锁
+            for (int i = 0; i < 2; i++) {
+                new Thread(() -> {
+                    synchronized (obj) {
+                        System.out.println("两个线程竞争,进入重量级锁状态");
+                        System.out.println(ClassLayout.parseInstance(obj).toPrintable());
+                    }
+                }).start();
+            }
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println("线程结束后,处于无锁态");
+            System.out.println(ClassLayout.parseInstance(obj).toPrintable());
         }
-        TimeUnit.SECONDS.sleep(1);
-        System.out.println("线程结束后,处于无锁态");
-        System.out.println(ClassLayout.parseInstance(obj).toPrintable());
+
     }
 }
