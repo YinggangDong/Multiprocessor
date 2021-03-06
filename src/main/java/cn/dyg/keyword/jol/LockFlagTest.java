@@ -22,11 +22,11 @@ public class LockFlagTest {
 //        noLock();
 //        biasedLock();
 //        lightLock();
-        heavyLock();
+//        heavyLock();
     }
 
     /**
-     * noLock 方法是 无锁状态
+     * noLock 方法是 无锁状态（尽管无同步代码块,但实际是默认偏向锁）
      *
      * @author dongyinggang
      * @date 2021/3/4 17:06
@@ -79,7 +79,7 @@ public class LockFlagTest {
         Object obj = new Object();
         System.out.println("另起线程前,处于偏向锁态");
         System.out.println(ClassLayout.parseInstance(obj).toPrintable());
-        //3.第一个线程,进入偏偏向锁状态
+        //3.第一个线程,进入偏向锁状态
         new Thread(() -> {
             synchronized (obj) {
                 System.out.println("第一个线程,保持偏向锁状态 ");
