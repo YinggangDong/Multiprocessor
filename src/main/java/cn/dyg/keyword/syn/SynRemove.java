@@ -50,7 +50,8 @@ public class SynRemove {
      * 虽然使用了 synchronized
      * 但由于 obj 是局部变量，每次调用都会是新的对象，
      * 因此实际会被优化，执行锁消除，和没有 synchronized 的代码效率一样高
-     * 如果锁消除被关闭：则会慢很多,JVM参数增加
+     * 如果锁消除被关闭：则会慢很多,JVM参数增加 -XX:-EliminateLocks
+     * 本测试结果是 10 倍数量级以上的差距
      */
     @Benchmark
     public void locked() {
