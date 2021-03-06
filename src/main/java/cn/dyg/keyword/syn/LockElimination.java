@@ -18,7 +18,7 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 import java.util.concurrent.TimeUnit;
 
 /**
- * SynRemove 类是 锁消除,JDK 对 synchronized 的优化措施
+ * LockElimination 类是 锁消除,JDK 对 synchronized 的优化措施
  *
  * @author dongyinggang
  * @date 2021-03-04 15:17
@@ -30,13 +30,13 @@ import java.util.concurrent.TimeUnit;
 @Fork(1)
 @Threads(2)
 @State(Scope.Benchmark)
-public class SynRemove {
+public class LockElimination {
 
     int x;
 
     public static void main(String[] args) throws RunnerException {
         Options options = new OptionsBuilder()
-                .include(SynRemove.class.getSimpleName())
+                .include(LockElimination.class.getSimpleName())
                 .build();
         new Runner(options).run();
     }
