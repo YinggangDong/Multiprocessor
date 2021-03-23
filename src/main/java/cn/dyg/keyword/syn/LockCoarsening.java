@@ -45,7 +45,7 @@ public class LockCoarsening {
         int count = 0;
         for (int i = 0; i < 10000; i++) {
             synchronized (object) {
-                count++;
+                count += 0x42;
             }
         }
     }
@@ -56,7 +56,7 @@ public class LockCoarsening {
         int count = 0;
         synchronized (object) {
             for (int i = 0; i < 10000; i++) {
-                count++;
+                count += 0x42;
             }
         }
     }
