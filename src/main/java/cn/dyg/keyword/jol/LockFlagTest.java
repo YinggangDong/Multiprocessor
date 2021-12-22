@@ -22,7 +22,7 @@ public class LockFlagTest {
 //        noLock();
 //        biasedLock();
 //        lightLock();
-//        heavyLock();
+        heavyLock();
     }
 
     /**
@@ -79,7 +79,7 @@ public class LockFlagTest {
         Object obj = new Object();
         System.out.println("另起线程前,处于偏向锁态");
         System.out.println(ClassLayout.parseInstance(obj).toPrintable());
-        //3.第一个线程,进入偏向锁状态
+        //3.第一个线程,保持偏向锁状态
         new Thread(() -> {
             synchronized (obj) {
                 System.out.println("第一个线程,保持偏向锁状态 ");
@@ -113,7 +113,7 @@ public class LockFlagTest {
     private static void heavyLock() throws InterruptedException {
         TimeUnit.SECONDS.sleep(5);
         Object obj = new Object();
-        System.out.println("另起线程前,处于偏向锁态");
+        System.out.println("另起线程前,处于偏向锁态 1 01");
         System.out.println(ClassLayout.parseInstance(obj).toPrintable());
         //第一次结束后,obj 处于无锁态,第二次,再次膨胀为重量级锁,再次结束后,又处于无锁态了
         for (int j = 0; j < 2; j++) {
@@ -121,13 +121,13 @@ public class LockFlagTest {
             for (int i = 0; i < 2; i++) {
                 new Thread(() -> {
                     synchronized (obj) {
-                        System.out.println("两个线程竞争,进入重量级锁状态");
+                        System.out.println("两个线程竞争,进入重量级锁状态 10");
                         System.out.println(ClassLayout.parseInstance(obj).toPrintable());
                     }
                 }).start();
             }
-            TimeUnit.SECONDS.sleep(1);
-            System.out.println("线程结束后,处于无锁态");
+            TimeUnit.SECONDS.sleep(2);
+            System.out.println("第" + j + 1 + "轮竞争线程结束后,处于无锁态 0 01");
             System.out.println(ClassLayout.parseInstance(obj).toPrintable());
         }
 

@@ -20,10 +20,18 @@ public class SynBlockRunnable implements Runnable {
     }
 
     public static void main(String[] args) {
+
+//        System.out.println("两个线程操作锁了同一实例this的");
 //        twoThreadOneInstance();
+
+//        System.out.println("两个线程分别锁两个实例this的");
 //        twoThreadTwoInstance();
-//        twoThreadSynThis();
-        twoThreadSynTwoObj();
+
+        System.out.println("两个线程调用不同方法，但锁一个实例的this的");
+        twoThreadSynThis();
+//
+//        System.out.println("两个线程调用不同方法，锁一个实例的不同对象");
+//        twoThreadSynTwoObj();
     }
 
     /**

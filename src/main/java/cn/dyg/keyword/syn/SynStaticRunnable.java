@@ -8,24 +8,19 @@ package cn.dyg.keyword.syn;
  **/
 public class SynStaticRunnable implements Runnable {
 
-    private SynObj synObj;
-
-    public SynStaticRunnable(SynObj synObj){
-        this.synObj = synObj;
+    public SynStaticRunnable(SynObj synObj) {
     }
 
     @Override
     public void run() {
         //调用加锁的静态方法
         SynObj.staticMethod();
-        //如果使用实例来调用静态方法,编译器会提示但运行不会报错,不建议这样用
-//        synObj.staticMethod();
     }
 
     public static void main(String[] args) {
         twoThreadTwoInstance();
         //其他方法依然可以正常调用。
-//        doSomething();
+        SynObj.doSomething();
     }
 
     /**
@@ -44,11 +39,5 @@ public class SynStaticRunnable implements Runnable {
         Thread thread2 = new Thread(new SynStaticRunnable(synObj2));
         thread1.start();
         thread2.start();
-    }
-
-    private static void doSomething(){
-        while(true){
-            System.out.println("其他方法可以被调用");
-        }
     }
 }

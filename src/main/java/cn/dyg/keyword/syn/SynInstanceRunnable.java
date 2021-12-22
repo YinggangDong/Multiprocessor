@@ -21,8 +21,8 @@ public class SynInstanceRunnable implements Runnable {
 
     public static void main(String[] args) {
 
-        twoThreadOneInstance();
-//        twoThreadTwoInstance();
+//        twoThreadOneInstance();
+        twoThreadTwoInstance();
     }
 
     /**

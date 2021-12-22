@@ -10,6 +10,8 @@ package cn.dyg.keyword.syn;
 public class SynObj {
 
     private static final int FIVE_INT = 5;
+    private static final int SLEEP_MILLIS = 1000;
+    private static final int TEN = 10;
     private final Object lock1 = new Object();
     private final Object lock2 = new Object();
 
@@ -19,14 +21,27 @@ public class SynObj {
      * @author dongyinggang
      * @date 2020/12/9 13:11
      */
-    synchronized static void staticMethod() {
+    public static synchronized void staticMethod() {
         for (int i = 0; i < FIVE_INT; i++) {
             System.out.println(Thread.currentThread().getName());
             try {
-                Thread.sleep(1000);
+                Thread.sleep(SLEEP_MILLIS);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public static void doSomething() {
+        int loopTimes = 0;
+        while (loopTimes < TEN) {
+            System.out.println("非同步方法可以被调用");
+            try {
+                Thread.sleep(SLEEP_MILLIS);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            loopTimes++;
         }
     }
 
@@ -37,9 +52,14 @@ public class SynObj {
      * @author dongyinggang
      * @date 2020/11/27 16:28
      */
-    synchronized void instanceMethod() {
+    public synchronized void instanceMethod() {
         for (int i = 0; i < FIVE_INT; i++) {
             System.out.println(Thread.currentThread().getName());
+            try {
+                Thread.sleep(SLEEP_MILLIS);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -50,20 +70,32 @@ public class SynObj {
      * @author dongyinggang
      * @date 2020/11/27 16:39
      */
-    synchronized void synchronizedBlock() {
+    public void synchronizedBlock() {
         // 修饰代码块
-        synchronized (this){
+        synchronized (this) {
             for (int i = 0; i < FIVE_INT; i++) {
                 System.out.println(Thread.currentThread().getName());
+                try {
+                    Thread.sleep(SLEEP_MILLIS);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
-    synchronized void synchronizedBlockThis() {
+    public void synchronizedBlockThis() {
+        System.out.println("已进入 synchronizedBlockThis 方法，需要获取当前实例对象的锁才能继续执行...");
         // 修饰代码块
-        synchronized (this){
+        synchronized (this) {
+            System.out.println("synchronizedBlockThis 方法获取到当前实例的锁，继续执行");
             for (int i = 0; i < FIVE_INT; i++) {
                 System.out.println(Thread.currentThread().getName());
+                try {
+                    Thread.sleep(SLEEP_MILLIS);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -75,21 +107,32 @@ public class SynObj {
      * @author dongyinggang
      * @date 2020/12/9 19:41
      */
-    void synchronizedBlockObj1() {
+    public void synchronizedBlockObj1() {
         // 修饰代码块
-        synchronized (lock1){
+        synchronized (lock1) {
             for (int i = 0; i < FIVE_INT; i++) {
                 System.out.println(Thread.currentThread().getName());
+                try {
+                    Thread.sleep(SLEEP_MILLIS);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
-    void synchronizedBlockObj2() {
+    public void synchronizedBlockObj2() {
         // 修饰代码块
-        synchronized (lock2){
+        synchronized (lock2) {
             for (int i = 0; i < FIVE_INT; i++) {
                 System.out.println(Thread.currentThread().getName());
+                try {
+                    Thread.sleep(SLEEP_MILLIS);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
+
 }
